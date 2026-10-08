@@ -1,0 +1,9 @@
+{% extends 'layout/base.html' %}
+
+{% block titulo %}login{% endblock %}
+
+{% block content %}
+	{% with method='POST', form=form %}
+		{% include 'partials/_form.html' %}
+	{% endwith %}
+{% endblock %}
