@@ -4,7 +4,7 @@ import wtforms
 class LoginForm(FlaskForm):
     username = wtforms.StringField(validators=[
         wtforms.validators.DataRequired(), 
-        wtforms.validators.Length(50)
+        wtforms.validators.Length(max=50)
     ])
     senha = wtforms.PasswordField(validators=[
         wtforms.validators.DataRequired(), 

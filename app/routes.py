@@ -1,7 +1,7 @@
-from alembic.autogenerate import render
-from flask import request, render_template
+from flask import redirect, render_template, url_for
+from flask_login import login_user
 from sqlalchemy import select
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 
 from app import app, db
 from app.forms import LoginForm
@@ -13,22 +13,26 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     
     if not form.validate_on_submit():
         return render_template('login.html', form=form)
 
-    usuario = db.session.execute(
+    usuario = db.session.scalar(
         select(Usuario).where(
             Usuario.username == form.username.data
         )        
     )
+    
+    if not usuario:
+        return render_template('login.html', form=form)
 
     if not check_password_hash(usuario.senha, form.senha.data):
         return render_template('login.html', form=form)
 
-    # usar função de login...
-    
+    login_user(usuario)
 
+    return redirect(url_for('home'))
+   
