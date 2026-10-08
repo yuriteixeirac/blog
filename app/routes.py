@@ -1,7 +1,9 @@
+from flask import render_template
+
 from app import app
 
 
 @app.route('/')
 def home():
-    return 'home do blog'
+    return render_template('index.html')
 
