@@ -10,7 +10,7 @@ from app.models import Usuario
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', postagens=[{'corpo': 'la ele'}, {'corpo': 'tchobs'}])
 
 
 @app.route('/login', methods=['GET', 'POST'])

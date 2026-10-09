@@ -2,6 +2,19 @@
 
 {% block titulo %}home{% endblock %}
 
+{% include 'partials/_header.html' %}
+
 {% block content %}
-	<p>hello, world!</p>
+	<section id="postagens">
+		{% for postagem in postagens %}
+			<article>
+				<p>{{ postagem.corpo }}</p>
+			</article>	
+		{% endfor %}
+	</section>
+
+	<section id="home">
+		<h2 class="center"><u>sobre da página</u></h2>
+		<p>hello, world!</p>
+	</section>
 {% endblock %}
