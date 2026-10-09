@@ -2,19 +2,32 @@
 
 {% block titulo %}home{% endblock %}
 
-{% include 'partials/_header.html' %}
 
 {% block content %}
 	<section id="postagens">
-		{% for postagem in postagens %}
-			<article>
-				<p>{{ postagem.corpo }}</p>
-			</article>	
-		{% endfor %}
+		<h2>postagens</h2>
+		<div class="postagens">
+			{% if postagens %}
+				{% for postagem in postagens %}
+					<article>
+						<p>{{ postagem.corpo }}</p>
+					</article>	
+					<p>{{ postagem.data }}</p>
+				{% endfor %}
+			{% else %}
+				<p>não há postagens recentes.</p>
+			{% endif %}
+
+		</div>
 	</section>
 
 	<section id="home">
 		<h2 class="center"><u>sobre da página</u></h2>
-		<p>hello, world!</p>
+		<div id="intro">
+			<p>hello, world!</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id error porro modi illum alias magnam neque, odio officia assumenda corrupti blanditiis necessitatibus iure quae! Nam temporibus sapiente saepe blanditiis distinctio!</p>
+		</div>
 	</section>
+
+
 {% endblock %}

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import redirect, render_template, url_for
 from flask_login import login_user
 from sqlalchemy import select
@@ -10,7 +12,7 @@ from app.models import Usuario
 
 @app.route('/')
 def home():
-    return render_template('index.html', postagens=[{'corpo': 'la ele'}, {'corpo': 'tchobs'}])
+    return render_template('index.html', postagens=[])
 
 
 @app.route('/login', methods=['GET', 'POST'])
