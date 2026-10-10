@@ -1,5 +1,9 @@
 <header>
 	<h1>blog da silva</h1>
+
+	{% if usuario and usuario.is_authenticated %}
+		<p>logado</p>
+	{% endif %}
 	
 	<nav>
 		<ul>

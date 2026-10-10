@@ -10,3 +10,8 @@ class LoginForm(FlaskForm):
         wtforms.validators.DataRequired(), 
         wtforms.validators.Length(min=8)
     ])
+
+
+class PostagemForm(FlaskForm):
+    corpo = wtforms.StringField(validators=[wtforms.validators.DataRequired(), wtforms.validators.Length(1, 324)])
+

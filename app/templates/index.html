@@ -7,12 +7,19 @@
 	<section id="postagens">
 		<h2>postagens</h2>
 		<div class="postagens">
+			{% if usuario and usuario.is_authenticated %}
+				<form id="postagem-form" action="" method="post">
+					<input name="corpo" type="text" placeholder="corpo da postagem">
+					<button type="submit">enviar</button>
+				</form>
+			{% endif %}
+
 			{% if postagens %}
 				{% for postagem in postagens %}
 					<article>
 						<p>{{ postagem.corpo }}</p>
+						<p>{{ postagem.criado_em }}</p>
 					</article>	
-					<p>{{ postagem.data }}</p>
 				{% endfor %}
 			{% else %}
 				<p>não há postagens recentes.</p>
