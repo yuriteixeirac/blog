@@ -1,12 +1,10 @@
-from datetime import datetime
-
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, login_user, current_user, logout_user
 from sqlalchemy import select
 from werkzeug.security import check_password_hash
 
 from app import app, db
-from app.forms import LoginForm, PostagemForm
+from app.forms import LoginForm
 from app.models import Usuario
 from app.models.postagem import Postagem
 
@@ -52,6 +50,11 @@ def login():
     login_user(usuario)
 
     return redirect(url_for('home'))
+
+
+@app.route('/artigos')
+def artigos():
+    return render_template('artigos.html', usuario=current_user)
    
 
 @app.route('/logout')

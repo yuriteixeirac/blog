@@ -4,37 +4,19 @@
 
 
 {% block content %}
-	<section id="postagens">
-		<h2>postagens</h2>
-		<div class="postagens">
-			{% if usuario and usuario.is_authenticated %}
-				<form id="postagem-form" action="" method="post">
-					<input name="corpo" type="text" placeholder="corpo da postagem">
-					<button type="submit">enviar</button>
-				</form>
-			{% endif %}
-
-			{% if postagens %}
-				{% for postagem in postagens %}
-					<article>
-						<p>{{ postagem.corpo }}</p>
-						<p>{{ postagem.criado_em }}</p>
-					</article>	
-				{% endfor %}
-			{% else %}
-				<p>não há postagens recentes.</p>
-			{% endif %}
-
+		<h2 class="center">breve introdução</h2>
+		
+		<div id="header-gif">
+			<img src="https://blob.gifcities.org/gifcities/K3QC5HKUYNGPBM2EIMEC6SLC6SHSWGFV.gif" alt="">
+			<img src="https://blob.gifcities.org/gifcities/K3QC5HKUYNGPBM2EIMEC6SLC6SHSWGFV.gif" alt="">
+			<img src="https://blob.gifcities.org/gifcities/K3QC5HKUYNGPBM2EIMEC6SLC6SHSWGFV.gif" alt="">
 		</div>
-	</section>
 
-	<section id="home">
-		<h2 class="center"><u>sobre da página</u></h2>
 		<div id="intro">
 			<p>hello, world!</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id error porro modi illum alias magnam neque, odio officia assumenda corrupti blanditiis necessitatibus iure quae! Nam temporibus sapiente saepe blanditiis distinctio!</p>
+			<p>lorem ipsum dolor sit amet consectetur adipisicing elit. Id error porro modi illum alias magnam neque, odio officia assumenda corrupti blanditiis necessitatibus iure quae! Nam temporibus sapiente saepe blanditiis distinctio!</p>
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam voluptatum maiores aut esse, quis inventore magnam facilis, atque doloremque reiciendis quidem nisi optio. Atque, omnis. Voluptatum magni at omnis eveniet.</p>
 		</div>
-	</section>
 
 
 {% endblock %}

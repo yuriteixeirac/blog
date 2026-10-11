@@ -8,8 +8,11 @@
 </head>
 <body>
 	{% include 'partials/_header.html' %}
-	<main>
-		{% block content %}{% endblock %}
-	</main>
+	<div id="container">
+		{% include 'partials/_postagens.html' %}
+		<main>
+			{% block content %}{% endblock %}
+		</main>
+	</div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<section id="balbuceios-board">
+	<h2>balbuceios board</h2>
+	{% if usuario and usuario.is_authenticated %}
+		<form id="balbuceio-form" action="" method="post">
+			<input name="corpo" type="text" placeholder="corpo da postagem">
+			<button type="submit">enviar</button>
+		</form>
+	{% endif %}
+
+	<div class="balbuceios">
+		{% if postagens %}
+			{% for postagem in postagens %}
+				<article>
+					<p>{{ postagem.corpo }}</p>
+				</article>	
+			{% endfor %}
+		{% else %}
+			<p>não há postagens recentes.</p>
+		{% endif %}
+	</div>
+</section>

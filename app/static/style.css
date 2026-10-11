@@ -11,24 +11,42 @@ body {
 	font-family: "Finlandica Text";
 	grid-template-columns: 1fr 75% 1fr;
 	background-color: #303446;
-	color: #cdd6f4;
 }
 
 body > * {
 	grid-column: 2;
 }
 
-a {
-	color: #cdd6f4;
+body, a {
+	color: #f9e2af;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	grid-template-rows: 1fr;
 	align-items: center;
 	padding: 1rem 0;
 	margin: 0 0 1rem 0;
-	border-bottom: 2px solid #b7bdf8;
+	border-bottom: 2px solid #f9e2af;
+}
+
+header > h1 {
+	grid-column: 1;
+	grid-row: 1;
+	justify-self: left;
+}
+
+header > nav {
+	grid-column: 2;
+	grid-row: 1;
+	justify-self: center;
+}
+
+header > p {
+	grid-column: 3;
+	grid-row: 1;
+	justify-self: end;
 }
 
 header > nav > ul {
@@ -38,36 +56,39 @@ header > nav > ul {
 	gap: 32px;
 }
 
-main {
+#container {
 	display: grid;
-	grid-template-columns: 30% 1fr;
+	grid-template-columns: 24% 1fr;
 	gap: 12px;
 }
 
-#postagens {
-	border: 2px solid #b7bdf8;
-	border-radius: 6px;
+#balbuceios-board {
+	border: 2px solid #f9e2af;
 	padding: 0 8px;
 }
 
-#postagens > h2 {
+#balbuceios-board > h2 {
+	display: flex;
+	align-items: center;
 	padding: 0.3rem 0;
 	text-align: center;
-	border-bottom: 2px solid #b7bdf8;
+	border-bottom: 2px solid #f9e2af;
 }
 
-.postagens > article {
-	border: 2px solid #b7bdf8;
+.balbuceios > article {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #f9e2af;
 	padding: 10px;
 	margin: 8px 0;
-	border-radius: 6px;
+	word-break: break-all;
 }
 
-.postagens {
+.balbuceios {
 	padding: 0.5rem 0;
 }
 
-#home > #intro {
+main > #intro {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -79,12 +100,21 @@ main {
 	flex-direction: column;
 }
 
-#postagem-form {
+#balbuceio-form {
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
 }
 
-#postagem-form > input[type=text] {
+#balbuceio-form > input[type=text] {
 	padding: 0.3rem 0.5rem;
+}
+
+#header-gif {
+	display: flex;
+}
+
+.center {
+	margin: 0 0 0.5rem 0;
+	border-bottom: 2px solid #f9e2af;
 }
