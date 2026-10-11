@@ -3,5 +3,22 @@
 {% block titulo %}artigos{% endblock %}
 
 {% block content %}
-
+	<div id="intro">
+		<h2 class="center">artigos</h2>
+		<p>aqui estão arquivadas publicações mais longas, onde eu falo sobre mim, meus gostos, planos, aspirações, ideias.. de tudo um pouco, como um diário virtual.</p>
+	</div>
+		<section id="artigos">
+		{% if artigos %}
+			{% for artigo in artigos %}
+				<a href="">
+					<article>
+						<h3>{{ artigo.titulo }}</h3>
+						<p>{{ artigo.corpo[:50] }}...</p>
+					</article>
+				</a>
+			{% endfor %}
+		{% else %}
+			<p>sem artigos publicados por enquanto..</p>
+		{% endif %}
+	</section>
 {% endblock %}

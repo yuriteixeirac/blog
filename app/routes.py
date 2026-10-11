@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash
 from app import app, db
 from app.forms import LoginForm
 from app.models import Usuario
+from app.models.artigo import Artigo
 from app.models.postagem import Postagem
 
 
@@ -54,7 +55,26 @@ def login():
 
 @app.route('/artigos')
 def artigos():
-    return render_template('artigos.html', usuario=current_user)
+    if request.method == 'GET':
+        artigos = db.session.scalars(
+            select(Artigo)        
+        ).all()
+
+        postagens = db.session.scalars(
+            select(Postagem)
+        ).all()[::-1]
+
+        return render_template('artigos.html', artigos=artigos, postagens=postagens, usuario=current_user)
+
+    postagem = Postagem(
+        corpo=request.form.get('corpo'),
+        autor=current_user
+    )
+
+    db.session.add(postagem)
+    db.session.commit()
+
+    return render_template('artigos.html', artigos=artigos, usuario=current_user, postagens=postagens)
    
 
 @app.route('/logout')

@@ -75,7 +75,7 @@ header > nav > ul {
 	border-bottom: 2px solid #f9e2af;
 }
 
-.balbuceios > article {
+#balbuceios > article {
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #f9e2af;
@@ -84,7 +84,7 @@ header > nav > ul {
 	word-break: break-all;
 }
 
-.balbuceios {
+#balbuceios {
 	padding: 0.5rem 0;
 }
 

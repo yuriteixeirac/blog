@@ -2,12 +2,12 @@
 	<h2>balbuceios board</h2>
 	{% if usuario and usuario.is_authenticated %}
 		<form id="balbuceio-form" action="" method="post">
-			<input name="corpo" type="text" placeholder="corpo da postagem">
+			<input name="corpo" type="text" minlength="1" maxlength="324" placeholder="corpo da postagem">
 			<button type="submit">enviar</button>
 		</form>
 	{% endif %}
 
-	<div class="balbuceios">
+	<div id="balbuceios">
 		{% if postagens %}
 			{% for postagem in postagens %}
 				<article>
