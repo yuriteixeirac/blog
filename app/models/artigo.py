@@ -14,4 +14,14 @@ class Artigo(db.Model):
     autor_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('usuario.id'))
     criado_em: so.Mapped[datetime] = so.mapped_column(sa.DateTime(), default=datetime.now)
     atualizado_em: so.Mapped[datetime] = so.mapped_column(sa.DateTime(), default=datetime.now, onupdate=datetime.now)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'titulo': self.titulo,
+            'corpo': self.corpo,
+            'autor_id': self.autor_id,
+            'criado_em': self.criado_em,
+            'atualizado_em': self.atualizado_em
+        }
      

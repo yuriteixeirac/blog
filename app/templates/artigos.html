@@ -3,17 +3,17 @@
 {% block titulo %}artigos{% endblock %}
 
 {% block content %}
+	<h2 class="center">artigos</h2>
 	<div id="intro">
-		<h2 class="center">artigos</h2>
 		<p>aqui estão arquivadas publicações mais longas, onde eu falo sobre mim, meus gostos, planos, aspirações, ideias.. de tudo um pouco, como um diário virtual.</p>
 	</div>
 		<section id="artigos">
 		{% if artigos %}
 			{% for artigo in artigos %}
-				<a href="">
+				<a href="{{ url_for('artigo_detail', id=artigo.id) }}">
 					<article>
 						<h3>{{ artigo.titulo }}</h3>
-						<p>{{ artigo.corpo[:50] }}...</p>
+						<p>{{ artigo.corpo[:100] }}...</p>
 					</article>
 				</a>
 			{% endfor %}

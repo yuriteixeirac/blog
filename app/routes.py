@@ -82,3 +82,11 @@ def get_balbuceios():
 
     return jsonify([balbuceio.to_dict() for balbuceio in balbuceios]), 200
 
+
+@app.route('/artigo/<id>')
+def artigo_detail(id: int):
+    artigo = db.session.scalar(
+        select(Artigo).where(Artigo.id == id)
+    )
+    return render_template('artigo-detail.html', usuario=current_user, artigo=artigo)
+
