@@ -21,8 +21,17 @@
 				const balbuceioArticle = document.createElement("article");
 				balbuceioArticle.innerHTML = `
 					<p>${balbuceio.corpo}</p>
-				`
+				`;
 				balbuceiosBar.appendChild(balbuceioArticle);
 			}
 		));
+
+	if (balbuceiosBar.innerHTML == "\n\t") {
+		let paragrafoVazio = document.createElement("p");
+		paragrafoVazio.innerText = 'sem balbuceios disponíveis!';
+
+		balbuceiosBar.appendChild(
+			paragrafoVazio	
+		);
+	}
 </script>
