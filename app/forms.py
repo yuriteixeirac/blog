@@ -11,3 +11,13 @@ class LoginForm(FlaskForm):
         wtforms.validators.Length(min=8)
     ])
 
+
+class ArtigoForm(FlaskForm):
+    titulo = wtforms.StringField(validators=[
+        wtforms.validators.DataRequired(),
+        wtforms.validators.Length(min=1, max=324)
+    ])
+    corpo = wtforms.TextAreaField(
+        validators=[wtforms.validators.DataRequired()]
+    )
+

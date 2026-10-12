@@ -6,10 +6,10 @@ from datetime import datetime
 from app import db
 
 
-class Postagem(db.Model):
+class Balbuceio(db.Model):
     id: so.Mapped[int] = so.mapped_column(sa.Integer(), primary_key=True)
     corpo: so.Mapped[str] = so.mapped_column(sa.String(324), nullable=False)
-    autor: so.Mapped['Usuario'] = so.relationship(back_populates='postagens')
+    autor: so.Mapped['Usuario'] = so.relationship(back_populates='balbuceios')
     autor_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('usuario.id'))
     criado_em: so.Mapped[datetime] = so.mapped_column(sa.DateTime(), default=datetime.now)
     atualizado_em: so.Mapped[datetime] = so.mapped_column(sa.DateTime(), default=datetime.now, onupdate=datetime.now)

@@ -9,6 +9,9 @@
 		<ul>
 			<li><a href="{{ url_for('home') }}">home</a></li>
 			<li><a href="{{ url_for('artigos') }}">artigos</a></li>
+			{% if usuario and usuario.is_authenticated %}
+				<li><a href="{{ url_for('artigo_form') }}">escrever</a></li>
+			{% endif %}
 		</ul>
 	</nav>
 </header>

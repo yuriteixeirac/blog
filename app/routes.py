@@ -2,12 +2,11 @@ from flask import abort, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, current_user, logout_user
 from sqlalchemy import select
 from werkzeug.security import check_password_hash
+from markdown import markdown
 
 from app import app, db
-from app.forms import LoginForm
-from app.models import Usuario
-from app.models.artigo import Artigo
-from app.models.postagem import Postagem
+from app.forms import ArtigoForm, LoginForm
+from app.models import Usuario, Balbuceio, Artigo
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -63,12 +62,12 @@ def post_balbuceio():
     if not 1 < len(corpo) < 324:
         abort(400)
 
-    postagem = Postagem(
+    balbuceio = Balbuceio(
         corpo=corpo,
         autor=current_user
     )
 
-    db.session.add(postagem)
+    db.session.add(balbuceio)
     db.session.commit()
 
     return redirect(url_for('home'))
@@ -77,7 +76,7 @@ def post_balbuceio():
 @app.route('/balbuceios')
 def get_balbuceios():
     balbuceios = db.session.scalars(
-        select(Postagem)
+        select(Balbuceio)
     ).all()[::-1]
 
     return jsonify([balbuceio.to_dict() for balbuceio in balbuceios]), 200
@@ -89,4 +88,30 @@ def artigo_detail(id: int):
         select(Artigo).where(Artigo.id == id)
     )
     return render_template('artigo-detail.html', usuario=current_user, artigo=artigo)
+
+
+@app.route('/artigo', methods=['GET', 'POST'])
+def artigo_form():
+    form = ArtigoForm()
+
+    if not form.validate_on_submit():
+        return render_template('login.html', usuario=current_user, form=form)
+
+    corpo = form.corpo.data.replace('\r\n', '\n').replace('\r', '\n')
+
+    artigo = Artigo(
+        titulo=form.titulo.data,
+        corpo=markdown(
+            corpo, 
+            extensions=['nl2br']
+        ),
+        autor=current_user
+    )
+
+    print(artigo.corpo)
+
+    db.session.add(artigo)
+    db.session.commit()
+
+    return redirect(url_for('artigos'))
 

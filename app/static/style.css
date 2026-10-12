@@ -134,3 +134,11 @@ main > #intro {
 	display: flex;
 	justify-content: space-between;
 }
+
+.artigo-body {
+	white-space: pre-wrap;
+}
+
+textarea {
+	height: 20rem;
+}

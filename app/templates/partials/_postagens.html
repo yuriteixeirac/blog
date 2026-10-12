@@ -7,8 +7,7 @@
 		</form>
 	{% endif %}
 
-	<div id="balbuceios">
-	</div>
+	<div id="balbuceios"></div>
 </section>
 
 <script type="module">
@@ -26,7 +25,7 @@
 			}
 		));
 
-	if (balbuceiosBar.innerHTML == "\n\t") {
+	if (!balbuceiosBar.innerHTML) {
 		let paragrafoVazio = document.createElement("p");
 		paragrafoVazio.innerText = 'sem balbuceios disponíveis!';
 

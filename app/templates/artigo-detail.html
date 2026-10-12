@@ -7,5 +7,5 @@
 		<h2>{{ artigo.titulo }}</h2>
 		<p>{{ artigo.atualizado_em }}</p>
 	</div>
-	<p>{{ artigo.corpo }}</p>
+	<div class="artigo-body">{{ artigo.corpo | safe }}</div>
 {% endblock %}
