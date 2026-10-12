@@ -1,21 +1,28 @@
 <section id="balbuceios-board">
 	<h2>balbuceios board</h2>
 	{% if usuario and usuario.is_authenticated %}
-		<form id="balbuceio-form" action="" method="post">
+		<form id="balbuceio-form" action="/balbuceios" method="post">
 			<input name="corpo" type="text" minlength="1" maxlength="324" placeholder="corpo da postagem">
 			<button type="submit">enviar</button>
 		</form>
 	{% endif %}
 
 	<div id="balbuceios">
-		{% if postagens %}
-			{% for postagem in postagens %}
-				<article>
-					<p>{{ postagem.corpo }}</p>
-				</article>	
-			{% endfor %}
-		{% else %}
-			<p>não há postagens recentes.</p>
-		{% endif %}
 	</div>
 </section>
+
+<script type="module">
+	const balbuceiosBar = document.getElementById("balbuceios");
+
+	let balbuceiosData = await fetch("/balbuceios")
+		.then(data => data.json())
+		.then(json => json.forEach(
+			(balbuceio) => {
+				const balbuceioArticle = document.createElement("article");
+				balbuceioArticle.innerHTML = `
+					<p>${balbuceio.corpo}</p>
+				`
+				balbuceiosBar.appendChild(balbuceioArticle);
+			}
+		));
+</script>

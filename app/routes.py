@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for
+from flask import abort, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, current_user, logout_user
 from sqlalchemy import select
 from werkzeug.security import check_password_hash
@@ -12,22 +12,8 @@ from app.models.postagem import Postagem
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'GET':
-        postagens = db.session.scalars(
-            select(Postagem)
-        ).all()[::-1]
+    return render_template('index.html', usuario=current_user)
 
-        return render_template('index.html', postagens=postagens, usuario=current_user)
-
-    postagem = Postagem(
-        corpo=request.form.get('corpo'),
-        autor=current_user
-    )
-
-    db.session.add(postagem)
-    db.session.commit()
-
-    return redirect(url_for('home'), )
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -55,30 +41,44 @@ def login():
 
 @app.route('/artigos')
 def artigos():
-    if request.method == 'GET':
-        artigos = db.session.scalars(
-            select(Artigo)        
-        ).all()
+    artigos = db.session.scalars(
+        select(Artigo)        
+    ).all()
+        
+    return render_template('artigos.html', artigos=artigos, usuario=current_user)
 
-        postagens = db.session.scalars(
-            select(Postagem)
-        ).all()[::-1]
-
-        return render_template('artigos.html', artigos=artigos, postagens=postagens, usuario=current_user)
-
-    postagem = Postagem(
-        corpo=request.form.get('corpo'),
-        autor=current_user
-    )
-
-    db.session.add(postagem)
-    db.session.commit()
-
-    return render_template('artigos.html', artigos=artigos, usuario=current_user, postagens=postagens)
-   
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+@app.route('/balbuceios', methods=['POST'])
+@login_required
+def post_balbuceio():
+    corpo = request.form.get('corpo')
+
+    if not 1 < len(corpo) < 324:
+        abort(400)
+
+    postagem = Postagem(
+        corpo=corpo,
+        autor=current_user
+    )
+
+    db.session.add(postagem)
+    db.session.commit()
+
+    return redirect(url_for('home'))
+
+
+@app.route('/balbuceios')
+def get_balbuceios():
+    balbuceios = db.session.scalars(
+        select(Postagem)
+    ).all()[::-1]
+
+    return jsonify([balbuceio.to_dict() for balbuceio in balbuceios]), 200
+
